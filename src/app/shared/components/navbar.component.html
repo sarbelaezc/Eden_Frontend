@@ -1,0 +1,32 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <h1>Eden</h1>
+  </div>
+  <ul class="nav-links">
+    <li>
+      <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        Dashboard
+      </a>
+    </li>
+    <li>
+      <a routerLink="/dashboard/products" routerLinkActive="active">
+        Productos
+      </a>
+    </li>
+    <li>
+      <a routerLink="/dashboard/machinery" routerLinkActive="active">
+        Maquinaria
+      </a>
+    </li>
+    <li>
+      <a routerLink="/dashboard/personnel" routerLinkActive="active">
+        Personal
+      </a>
+    </li>
+    <li>
+      <a routerLink="/settings" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        Settings
+      </a>
+    </li>
+  </ul>
+</nav>
