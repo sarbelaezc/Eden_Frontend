@@ -13,6 +13,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "bundler",
     "target": "ES2022",
     "module": "ES2022"
   },
