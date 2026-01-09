@@ -1,0 +1,62 @@
+<div class="login-container">
+  <div class="login-card">
+    <h1>Iniciar Sesión</h1>
+    
+    @if (errorMessage()) {
+      <div class="error-message" role="alert">
+        {{ errorMessage() }}
+      </div>
+    }
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Usuario</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          placeholder="Ingresa tu usuario"
+          [attr.aria-invalid]="username?.invalid && username?.touched"
+          [attr.aria-describedby]="username?.invalid && username?.touched ? 'username-error' : null"
+        />
+        @if (username?.invalid && username?.touched) {
+          <span id="username-error" class="error-text">El usuario es requerido</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Ingresa tu contraseña"
+          [attr.aria-invalid]="password?.invalid && password?.touched"
+          [attr.aria-describedby]="password?.invalid && password?.touched ? 'password-error' : null"
+        />
+        @if (password?.invalid && password?.touched) {
+          <span id="password-error" class="error-text">
+            @if (password?.hasError('required')) {
+              La contraseña es requerida
+            }
+            @if (password?.hasError('minlength')) {
+              La contraseña debe tener al menos 6 caracteres
+            }
+          </span>
+        }
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid || isLoading()"
+        [attr.aria-busy]="isLoading()"
+      >
+        @if (isLoading()) {
+          Cargando...
+        } @else {
+          Iniciar Sesión
+        }
+      </button>
+    </form>
+  </div>
+</div>
