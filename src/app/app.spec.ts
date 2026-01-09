@@ -1,10 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
+import { ROUTES, provideRouter } from '@angular/router';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [provideRouter([])]
     }).compileComponents();
   });
 
@@ -14,10 +16,17 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render navbar', async () => {
     const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Eden_Frontend');
+    expect(compiled.querySelector('app-navbar')).toBeTruthy();
+  });
+
+  it('should render main content outlet', async () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('main#main-content')).toBeTruthy();
   });
 });

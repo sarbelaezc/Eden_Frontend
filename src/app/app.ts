@@ -8,7 +8,7 @@ import { NavbarComponent } from './shared/components/navbar.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-navbar></app-navbar>
-    <main>
+    <main id="main-content">
       <router-outlet></router-outlet>
     </main>
   `,

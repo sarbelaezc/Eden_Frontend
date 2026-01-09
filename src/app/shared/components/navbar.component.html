@@ -1,30 +1,49 @@
-<nav class="navbar">
+<nav class="navbar" role="navigation" aria-label="Navegación principal">
   <div class="navbar-brand">
-    <h1>Eden</h1>
+    <a href="#main-content" class="navbar-brand-link" aria-label="Ir al contenido principal">
+      <h1>Eden</h1>
+    </a>
   </div>
   <ul class="nav-links">
     <li>
-      <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a 
+        routerLink="/dashboard" 
+        routerLinkActive="active" 
+        [routerLinkActiveOptions]="{ exact: true }"
+        aria-current="page">
         Dashboard
       </a>
     </li>
     <li>
-      <a routerLink="/dashboard/products" routerLinkActive="active">
+      <a 
+        routerLink="/dashboard/products" 
+        routerLinkActive="active"
+        aria-current="page">
         Productos
       </a>
     </li>
     <li>
-      <a routerLink="/dashboard/machinery" routerLinkActive="active">
+      <a 
+        routerLink="/dashboard/machinery" 
+        routerLinkActive="active"
+        aria-current="page">
         Maquinaria
       </a>
     </li>
     <li>
-      <a routerLink="/dashboard/personnel" routerLinkActive="active">
+      <a 
+        routerLink="/dashboard/personnel" 
+        routerLinkActive="active"
+        aria-current="page">
         Personal
       </a>
     </li>
     <li>
-      <a routerLink="/settings" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a 
+        routerLink="/settings" 
+        routerLinkActive="active" 
+        [routerLinkActiveOptions]="{ exact: true }"
+        aria-current="page">
         Settings
       </a>
     </li>
