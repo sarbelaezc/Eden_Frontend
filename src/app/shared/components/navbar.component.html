@@ -47,5 +47,15 @@
         Settings
       </a>
     </li>
+    <li class="user-profile">
+      <span class="user-name">{{ userDisplayName() }}</span>
+      <button 
+        type="button"
+        class="logout-btn"
+        (click)="onLogout()"
+        aria-label="Cerrar sesión">
+        Cerrar Sesión
+      </button>
+    </li>
   </ul>
 </nav>
