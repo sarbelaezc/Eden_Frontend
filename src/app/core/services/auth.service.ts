@@ -1,33 +1,33 @@
-import { Injectable, inject, signal } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { Observable, tap } from 'rxjs'
-import { environment } from '../../../environments/environment'
+import { Injectable, inject, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap, switchMap } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 interface AuthResponse {
-    access: string
-    refresh: string
+    access: string;
+    refresh: string;
     user: {
-        id: number
-        username: string
-        email: string
-        first_name: string
-        last_name: string
-        is_staff: boolean
-    }
+        id: number;
+        username: string;
+        email: string;
+        first_name: string;
+        last_name: string;
+        is_staff: boolean;
+    };
 }
 
 interface RefreshResponse {
-    access: string
+    access: string;
 }
 
 interface User {
-    id: number
-    username: string
-    email: string
-    first_name: string
-    last_name: string
-    is_staff: boolean
-    is_active: boolean
+    id: number;
+    username: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+    is_staff: boolean;
+    is_active: boolean;
 }
 
 @Injectable({
@@ -37,9 +37,14 @@ export class AuthService {
     private readonly http = inject(HttpClient);
     private readonly apiUrl = environment.apiUrl;
 
-    isAuthenticated = signal(this.hasToken());
+    private readonly accessToken = signal<string | null>(null);
+    
+    isAuthenticated = signal(false);
     currentUser = signal<User | null>(null);
-    token = signal<string | null>(this.getToken());
+    
+    constructor() {
+        this.restoreSession();
+    }
 
     login(username: string, password: string): Observable<AuthResponse> {
         return this.http.post<AuthResponse>(`${this.apiUrl}/login/`, {
@@ -47,72 +52,91 @@ export class AuthService {
             password
         }).pipe(
             tap(response => {
-                this.saveTokens(response.access, response.refresh)
-                this.isAuthenticated.set(true)
-                // El backend ya devuelve los datos del usuario en la respuesta
-                this.currentUser.set({
-                    ...response.user,
-                    is_active: true
-                })
+                this.accessToken.set(response.access);
+                sessionStorage.setItem('refresh_token', response.refresh);
+                this.isAuthenticated.set(true);
+                const user = { ...response.user, is_active: true };
+                this.currentUser.set(user);
+                this.saveUserToStorage(user);
             })
-        )
+        );
     }
 
     refreshToken(): Observable<RefreshResponse> {
-        const refreshToken = this.getRefreshToken()
-
+        const refreshToken = this.getRefreshToken();
         return this.http.post<RefreshResponse>(`${this.apiUrl}/token/refresh/`, {
             refresh: refreshToken
         }).pipe(
             tap(response => {
-                this.saveToken(response.access)
+                this.accessToken.set(response.access);
+                this.isAuthenticated.set(true);
             })
-        )
+        );
+    }
+
+    getCurrentUser(): Observable<User> {
+        return this.http.get<User>(`${this.apiUrl}/users/me/`).pipe(
+            tap(user => {
+                this.currentUser.set(user);
+                this.saveUserToStorage(user);
+            })
+        );
     }
 
     logout(): void {
-        localStorage.removeItem('access_token')
-        localStorage.removeItem('refresh_token')
-        this.isAuthenticated.set(false)
-        this.currentUser.set(null)
-        this.token.set(null)
+        this.accessToken.set(null);
+        sessionStorage.removeItem('refresh_token');
+        sessionStorage.removeItem('current_user');
+        this.isAuthenticated.set(false);
+        this.currentUser.set(null);
     }
 
-    private saveTokens(accessToken: string, refreshToken: string): void {
-        localStorage.setItem('access_token', accessToken)
-        localStorage.setItem('refresh_token', refreshToken)
-        this.token.set(accessToken)
+    private saveUserToStorage(user: User): void {
+        sessionStorage.setItem('current_user', JSON.stringify(user));
     }
 
-    private saveToken(token: string): void {
-        localStorage.setItem('access_token', token)
-        this.token.set(token)
+    private loadUserFromStorage(): User | null {
+        const userJson = sessionStorage.getItem('current_user');
+        if (!userJson) return null;
+        try { return JSON.parse(userJson); }
+        catch { return null; }
     }
 
-    private getToken(): string | null {
-        return localStorage.getItem('access_token')
-    }
-
-    private getRefreshToken(): string | null {
-        return localStorage.getItem('refresh_token')
-    }
-
-    private hasToken(): boolean {
-        return !!localStorage.getItem('access_token')
+    getRefreshToken(): string | null {
+        return sessionStorage.getItem('refresh_token');
     }
 
     getAuthToken(): string | null {
-        return this.token()
+        return this.accessToken();
+    }
+
+    private restoreSession(): void {
+        const refreshToken = this.getRefreshToken();
+        if (refreshToken) {
+            this.refreshToken().pipe(
+                switchMap(() => this.getCurrentUser())
+            ).subscribe({
+                next: () => this.isAuthenticated.set(true),
+                error: (err) => {
+                    console.error('Error al restaurar sesi�n:', err);
+                    const storedUser = this.loadUserFromStorage();
+                    if (storedUser) {
+                        this.currentUser.set(storedUser);
+                        this.isAuthenticated.set(true);
+                    } else {
+                        this.logout();
+                    }
+                }
+            });
+        }
     }
 
     getUserDisplayName(): string {
-        const user = this.currentUser()
-        if (!user) return ''
-
+        const user = this.currentUser();
+        if (!user) return '';
         if (user.first_name || user.last_name) {
-            return `${user.first_name} ${user.last_name}`.trim()
+            return `${user.first_name} ${user.last_name}`.trim();
         }
-
-        return user.username
+        return user.username;
     }
 }
