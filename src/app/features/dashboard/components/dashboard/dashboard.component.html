@@ -6,6 +6,12 @@
     </p>
   </header>
 
+  @if (errorMessage()) {
+    <div class="message-box message-box--{{ messageType() }}" role="alert">
+      {{ errorMessage() }}
+    </div>
+  }
+
   <section aria-labelledby="personnel-summary-title" class="personnel-section">
     <h2 id="personnel-summary-title">Resumen de Personal</h2>
     

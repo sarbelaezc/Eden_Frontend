@@ -9,10 +9,12 @@ import { AuthService } from '../../../../core/services/auth.service';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
-  private personnelService = inject(PersonnelService);
+  private readonly personnelService = inject(PersonnelService);
   protected authService = inject(AuthService);
   
   personnelSummary = this.personnelService.personnelSummary;
+  errorMessage = this.personnelService.errorMessage;
+  messageType = this.personnelService.messageType;
 
   ngOnInit(): void {
     // Solo cargar si el usuario está autenticado

@@ -38,6 +38,33 @@
   }
 }
 
+.message-box {
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  border: 1px solid;
+  font-size: 0.95rem;
+  line-height: 1.5;
+
+  &--error {
+    background-color: var(--message-error-bg);
+    color: var(--message-error-text);
+    border-color: var(--message-error-border);
+  }
+
+  &--warning {
+    background-color: var(--message-warning-bg);
+    color: var(--message-warning-text);
+    border-color: var(--message-warning-border);
+  }
+
+  &--info {
+    background-color: var(--message-info-bg);
+    color: var(--message-info-text);
+    border-color: var(--message-info-border);
+  }
+}
+
 .personnel-section {
   h2 {
     font-size: 1.5rem;
