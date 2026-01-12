@@ -25,7 +25,7 @@
 
     <!-- Backdrop -->
     @if (isMenuOpen()) {
-      <div class="navbar-backdrop" (click)="closeMenu()" aria-hidden="true"></div>
+      <div class="navbar-backdrop" (click)="closeMenu()" (keydown)="closeMenu()" aria-hidden="true"></div>
     }
 
     <div class="nav-menu" [class.nav-menu--open]="isMenuOpen()">
