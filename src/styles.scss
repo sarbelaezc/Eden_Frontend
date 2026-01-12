@@ -33,6 +33,33 @@
   // Borders sutiles
   --border-subtle: rgba(255, 255, 255, 0.1);
   --border-separator: rgba(255, 255, 255, 0.1);
+  
+  // Login page
+  --login-bg-gradient-start: #667eea;
+  --login-bg-gradient-end: #764ba2;
+  --login-card-bg: #ffffff;
+  --login-card-shadow: rgba(0, 0, 0, 0.2);
+  --login-text: #333333;
+  --login-input-border: #dddddd;
+  --login-input-focus: #667eea;
+  --login-input-focus-shadow: rgba(102, 126, 234, 0.1);
+  --login-input-disabled: #f5f5f5;
+  --login-btn-gradient-start: #5568d3;
+  --login-btn-gradient-end: #6a3e8f;
+  --login-btn-text: #ffffff;
+  --login-btn-shadow: rgba(102, 126, 234, 0.4);
+  --login-btn-focus-shadow: rgba(102, 126, 234, 0.5);
+  
+  // Messages
+  --message-error-bg: #f8d7da;
+  --message-error-text: #721c24;
+  --message-error-border: #f5c6cb;
+  --message-warning-bg: #fff3cd;
+  --message-warning-text: #856404;
+  --message-warning-border: #ffeaa7;
+  --message-info-bg: #d1ecf1;
+  --message-info-text: #0c5460;
+  --message-info-border: #bee5eb;
 }
 
 [data-theme="dark"] {
@@ -69,6 +96,33 @@
   // Borders sutiles - más visibles en dark
   --border-subtle: rgba(255, 255, 255, 0.1);
   --border-separator: rgba(255, 255, 255, 0.1);
+  
+  // Login page - tema oscuro
+  --login-bg-gradient-start: #1a202c;
+  --login-bg-gradient-end: #2d3748;
+  --login-card-bg: #1a202c;
+  --login-card-shadow: rgba(0, 0, 0, 0.6);
+  --login-text: #f7fafc;
+  --login-input-border: #4a5568;
+  --login-input-focus: #60a5fa;
+  --login-input-focus-shadow: rgba(96, 165, 250, 0.2);
+  --login-input-disabled: #2d3748;
+  --login-btn-gradient-start: #3b82f6;
+  --login-btn-gradient-end: #2563eb;
+  --login-btn-text: #ffffff;
+  --login-btn-shadow: rgba(96, 165, 250, 0.4);
+  --login-btn-focus-shadow: rgba(96, 165, 250, 0.5);
+  
+  // Messages - tema oscuro
+  --message-error-bg: #7f1d1d;
+  --message-error-text: #fecaca;
+  --message-error-border: #991b1b;
+  --message-warning-bg: #78350f;
+  --message-warning-text: #fed7aa;
+  --message-warning-border: #92400e;
+  --message-info-bg: #164e63;
+  --message-info-text: #cffafe;
+  --message-info-border: #0e7490;
 }
 
 * {
