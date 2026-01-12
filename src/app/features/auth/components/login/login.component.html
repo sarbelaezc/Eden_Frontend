@@ -3,7 +3,12 @@
     <h1>Iniciar Sesión</h1>
     
     @if (errorMessage()) {
-      <div class="error-message" role="alert">
+      <div 
+        class="message-box"
+        [class.message-error]="messageType() === 'error'"
+        [class.message-warning]="messageType() === 'warning'"
+        [class.message-info]="messageType() === 'info'"
+        role="alert">
         {{ errorMessage() }}
       </div>
     }
