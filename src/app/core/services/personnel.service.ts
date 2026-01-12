@@ -1,5 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -59,6 +59,18 @@ export class PersonnelService {
     totalPayroll: 0
   });
 
+  errorMessage = signal<string | null>(null);
+  messageType = signal<'error' | 'warning' | 'info'>('error');
+
+  private readonly statusConfig: Record<number, { type: 'error' | 'warning' | 'info'; fallback: string }> = {
+    400: { type: 'warning', fallback: 'Datos inválidos. Verifica la información ingresada.' },
+    401: { type: 'error', fallback: 'No autorizado. Inicia sesión nuevamente.' },
+    403: { type: 'error', fallback: 'Sin permisos para realizar esta operación.' },
+    404: { type: 'warning', fallback: 'Empleado no encontrado.' },
+    500: { type: 'error', fallback: 'Error del servidor. Intenta nuevamente más tarde.' },
+    0: { type: 'error', fallback: 'No se pudo conectar al servidor. Verifica tu conexión a internet.' }
+  };
+
   getEmployees(params?: {
     search?: string;
     position?: string;
@@ -100,7 +112,7 @@ export class PersonnelService {
         const employees = response.results;
         const salaries = employees
           .filter(e => e.status === 'active')
-          .map(e => parseFloat(e.salary));
+          .map(e => Number.parseFloat(e.salary));
         
         const totalPayroll = salaries.reduce((sum, salary) => sum + salary, 0);
         const averageSalary = salaries.length > 0 ? totalPayroll / salaries.length : 0;
@@ -116,8 +128,10 @@ export class PersonnelService {
         this.personnelSummary.set(summary);
       })
     ).subscribe({
-      error: (err) => {
-        console.error('Error loading personnel summary:', err);
+      next: () => {
+        this.errorMessage.set(null);
+      },
+      error: (error: HttpErrorResponse) => {
         this.personnelSummary.set({
           total: 0,
           active: 0,
@@ -126,7 +140,38 @@ export class PersonnelService {
           averageSalary: 0,
           totalPayroll: 0
         });
+
+        const apiMessage = this.extractErrorMessage(error);
+        const config = this.statusConfig[error.status] ?? { 
+          type: 'error', 
+          fallback: 'Error al cargar datos del personal.' 
+        };
+        
+        this.messageType.set(config.type);
+        this.errorMessage.set(apiMessage || config.fallback);
       }
     });
+  }
+
+  private extractErrorMessage(error: HttpErrorResponse): string | null {
+    if (!error.error) {
+      return error.message || null;
+    }
+    
+    if (typeof error.error === 'string') {
+      return error.error;
+    }
+    
+    const errorProps = ['detail', 'message', 'error', 'non_field_errors'];
+    
+    for (const prop of errorProps) {
+      if (error.error[prop]) {
+        return Array.isArray(error.error[prop]) 
+          ? error.error[prop].join(' ') 
+          : error.error[prop];
+      }
+    }
+    
+    return null;
   }
 }
