@@ -1,128 +1,115 @@
 :root {
-  // Tema Claro (default)
-  --primary-color: #3498db;
-  --navbar-bg: #2c3e50;
-  --navbar-border: #1a252f;
-  --navbar-text: #ffffff;
-  --navbar-link: #ecf0f1;
-  --shadow-md: rgba(0, 0, 0, 0.15);
-  --shadow-lg: rgba(0, 0, 0, 0.3);
-  --theme-toggle-bg: rgba(255, 255, 255, 0.1);
-  --theme-toggle-border: rgba(255, 255, 255, 0.2);
-  --theme-toggle-hover-bg: rgba(255, 255, 255, 0.2);
-  --nav-link-hover-bg: rgba(52, 152, 219, 0.1);
-  --nav-link-active-bg: rgba(52, 152, 219, 0.15);
-  --nav-link-active-bg-desktop: rgba(52, 152, 219, 0.2);
-  --user-info-bg: rgba(52, 152, 219, 0.1);
-  --body-bg: #f5f7fa;
-  --text-primary: #1a202c;
+  // Navbar
+  --primary-color: #3498db; // navbar
+  --navbar-bg: #2c3e50; // navbar
+  --navbar-border: #1a252f; // navbar
+  --navbar-text: #ffffff; // navbar
+  --navbar-link: #ecf0f1; // navbar
+  --shadow-md: rgba(0, 0, 0, 0.15); // navbar
+  --shadow-lg: rgba(0, 0, 0, 0.3); // navbar
+  --theme-toggle-bg: rgba(255, 255, 255, 0.1); // navbar
+  --theme-toggle-border: rgba(255, 255, 255, 0.2); // navbar
+  --theme-toggle-hover-bg: rgba(255, 255, 255, 0.2); // navbar
+  --nav-link-hover-bg: rgba(52, 152, 219, 0.1); // navbar
+  --nav-link-active-bg: rgba(52, 152, 219, 0.15); // navbar
+  --nav-link-active-bg-desktop: rgba(52, 152, 219, 0.2); // navbar
+  --user-info-bg: rgba(52, 152, 219, 0.1); // navbar
+  
+  // Global
+  --body-bg: #f5f7fa; // styles.scss
+  --text-primary: #1a202c; // styles.scss
   --text-secondary: #4a5568;
-  --card-bg: #ffffff;
+  --card-bg: #ffffff; // navbar, login
   --border-color: #e2e8f0;
+  --border-subtle: rgba(255, 255, 255, 0.1); // navbar
   
-  // Avatar
-  --avatar-gradient-start: #667eea;
-  --avatar-gradient-end: #764ba2;
-  --avatar-text: #ffffff;
-  --avatar-shadow: rgba(0, 0, 0, 0.2);
+  // Avatar (navbar)
+  --avatar-gradient-start: #667eea; // navbar, login (background gradient)
+  --avatar-gradient-end: #764ba2; // navbar, login (background gradient)
+  --avatar-text: #ffffff; // navbar, login (button text)
+  --avatar-shadow: rgba(0, 0, 0, 0.2); // navbar, login (card shadow)
   
-  // Danger/Logout
-  --danger-color: #e74c3c;
-  --danger-hover-shadow: rgba(231, 76, 60, 0.3);
+  // Danger/Logout (navbar)
+  --danger-color: #e74c3c; // navbar
+  --danger-hover-shadow: rgba(231, 76, 60, 0.3); // navbar
   
-  // Borders sutiles
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  --border-separator: rgba(255, 255, 255, 0.1);
+  // Login
+  --login-text: #333333; // login
+  --login-input-border: #dddddd; // login
+  --login-input-focus: #667eea; // login
+  --login-input-focus-shadow: rgba(102, 126, 234, 0.1); // login
+  --login-input-disabled: #f5f5f5; // login
+  --login-btn-gradient-start: #5568d3; // login
+  --login-btn-gradient-end: #6a3e8f; // login
+  --login-btn-shadow: rgba(102, 126, 234, 0.4); // login
+  --login-btn-focus-shadow: rgba(102, 126, 234, 0.5); // login
   
-  // Login page
-  --login-bg-gradient-start: #667eea;
-  --login-bg-gradient-end: #764ba2;
-  --login-card-bg: #ffffff;
-  --login-card-shadow: rgba(0, 0, 0, 0.2);
-  --login-text: #333333;
-  --login-input-border: #dddddd;
-  --login-input-focus: #667eea;
-  --login-input-focus-shadow: rgba(102, 126, 234, 0.1);
-  --login-input-disabled: #f5f5f5;
-  --login-btn-gradient-start: #5568d3;
-  --login-btn-gradient-end: #6a3e8f;
-  --login-btn-text: #ffffff;
-  --login-btn-shadow: rgba(102, 126, 234, 0.4);
-  --login-btn-focus-shadow: rgba(102, 126, 234, 0.5);
-  
-  // Messages
-  --message-error-bg: #f8d7da;
-  --message-error-text: #721c24;
-  --message-error-border: #f5c6cb;
-  --message-warning-bg: #fff3cd;
-  --message-warning-text: #856404;
-  --message-warning-border: #ffeaa7;
-  --message-info-bg: #d1ecf1;
-  --message-info-text: #0c5460;
-  --message-info-border: #bee5eb;
+  // Messages (login)
+  --message-error-bg: #f8d7da; // login
+  --message-error-text: #721c24; // login
+  --message-error-border: #f5c6cb; // login
+  --message-warning-bg: #fff3cd; // login
+  --message-warning-text: #856404; // login
+  --message-warning-border: #ffeaa7; // login
+  --message-info-bg: #d1ecf1; // login
+  --message-info-text: #0c5460; // login
+  --message-info-border: #bee5eb; // login
 }
 
 [data-theme="dark"] {
-  --primary-color: #60a5fa;
-  --navbar-bg: #1a202c;
-  --navbar-border: #0f1419;
-  --navbar-text: #f7fafc;
-  --navbar-link: #e2e8f0;
-  --shadow-md: rgba(0, 0, 0, 0.4);
-  --shadow-lg: rgba(0, 0, 0, 0.6);
-  --theme-toggle-bg: rgba(96, 165, 250, 0.1);
-  --theme-toggle-border: rgba(96, 165, 250, 0.3);
-  --theme-toggle-hover-bg: rgba(96, 165, 250, 0.2);
-  --nav-link-hover-bg: rgba(96, 165, 250, 0.1);
-  --nav-link-active-bg: rgba(96, 165, 250, 0.15);
-  --nav-link-active-bg-desktop: rgba(96, 165, 250, 0.25);
-  --user-info-bg: rgba(96, 165, 250, 0.1);
-  --body-bg: #0f1419;
-  --text-primary: #f7fafc;
+  // Navbar
+  --primary-color: #60a5fa; // navbar
+  --navbar-bg: #1a202c; // navbar
+  --navbar-border: #0f1419; // navbar
+  --navbar-text: #f7fafc; // navbar
+  --navbar-link: #e2e8f0; // navbar
+  --shadow-md: rgba(0, 0, 0, 0.4); // navbar
+  --shadow-lg: rgba(0, 0, 0, 0.6); // navbar
+  --theme-toggle-bg: rgba(96, 165, 250, 0.1); // navbar
+  --theme-toggle-border: rgba(96, 165, 250, 0.3); // navbar
+  --theme-toggle-hover-bg: rgba(96, 165, 250, 0.2); // navbar
+  --nav-link-hover-bg: rgba(96, 165, 250, 0.1); // navbar
+  --nav-link-active-bg: rgba(96, 165, 250, 0.15); // navbar
+  --nav-link-active-bg-desktop: rgba(96, 165, 250, 0.25); // navbar
+  --user-info-bg: rgba(96, 165, 250, 0.1); // navbar
+  
+  // Global
+  --body-bg: #0f1419; // styles.scss
+  --text-primary: #f7fafc; // styles.scss
   --text-secondary: #cbd5e0;
-  --card-bg: #1a202c;
+  --card-bg: #1a202c; // navbar, login
   --border-color: #2d3748;
   
-  // Avatar - colores más vibrantes en dark
-  --avatar-gradient-start: #818cf8;
-  --avatar-gradient-end: #a78bfa;
-  --avatar-text: #ffffff;
-  --avatar-shadow: rgba(0, 0, 0, 0.4);
+  // Avatar (navbar)
+  --avatar-gradient-start: #818cf8; // navbar
+  --avatar-gradient-end: #a78bfa; // navbar
+  --avatar-shadow: rgba(0, 0, 0, 0.4); // navbar, login (card shadow)
   
-  // Danger/Logout - más brillante en dark
-  --danger-color: #f87171;
-  --danger-hover-shadow: rgba(248, 113, 113, 0.4);
+  // Danger/Logout (navbar)
+  --danger-color: #f87171; // navbar
+  --danger-hover-shadow: rgba(248, 113, 113, 0.4); // navbar
   
-  // Borders sutiles - más visibles en dark
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  --border-separator: rgba(255, 255, 255, 0.1);
+  // Login
+  --login-text: #f7fafc; // login
+  --login-input-border: #4a5568; // login
+  --login-input-focus: #60a5fa; // login
+  --login-input-focus-shadow: rgba(96, 165, 250, 0.2); // login
+  --login-input-disabled: #2d3748; // login
+  --login-btn-gradient-start: #3b82f6; // login
+  --login-btn-gradient-end: #2563eb; // login
+  --login-btn-shadow: rgba(96, 165, 250, 0.4); // login
+  --login-btn-focus-shadow: rgba(96, 165, 250, 0.5); // login
   
-  // Login page - tema oscuro
-  --login-bg-gradient-start: #1a202c;
-  --login-bg-gradient-end: #2d3748;
-  --login-card-bg: #1a202c;
-  --login-card-shadow: rgba(0, 0, 0, 0.6);
-  --login-text: #f7fafc;
-  --login-input-border: #4a5568;
-  --login-input-focus: #60a5fa;
-  --login-input-focus-shadow: rgba(96, 165, 250, 0.2);
-  --login-input-disabled: #2d3748;
-  --login-btn-gradient-start: #3b82f6;
-  --login-btn-gradient-end: #2563eb;
-  --login-btn-text: #ffffff;
-  --login-btn-shadow: rgba(96, 165, 250, 0.4);
-  --login-btn-focus-shadow: rgba(96, 165, 250, 0.5);
-  
-  // Messages - tema oscuro
-  --message-error-bg: #7f1d1d;
-  --message-error-text: #fecaca;
-  --message-error-border: #991b1b;
-  --message-warning-bg: #78350f;
-  --message-warning-text: #fed7aa;
-  --message-warning-border: #92400e;
-  --message-info-bg: #164e63;
-  --message-info-text: #cffafe;
-  --message-info-border: #0e7490;
+  // Messages (login)
+  --message-error-bg: #7f1d1d; // login
+  --message-error-text: #fecaca; // login
+  --message-error-border: #991b1b; // login
+  --message-warning-bg: #78350f; // login
+  --message-warning-text: #fed7aa; // login
+  --message-warning-border: #92400e; // login
+  --message-info-bg: #164e63; // login
+  --message-info-text: #cffafe; // login
+  --message-info-border: #0e7490; // login
 }
 
 * {
