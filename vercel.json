@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/eden-frontend/browser",
+  "outputDirectory": "dist",
   "devCommand": "npm run start",
   "installCommand": "npm install",
   "framework": "angular",
