@@ -1,4 +1,86 @@
 <div class="personnel-container">
-  <h1>Personal</h1>
-  <p>Gestiona el personal de tu empresa</p>
+  <header class="personnel-header">
+    <h1>Personal</h1>
+    <p>Gestiona el personal de tu empresa</p>
+  </header>
+
+  @if (errorMessage()) {
+  <div class="message-box message-box--{{ messageType() }}" role="alert">
+    {{ errorMessage() }}
+  </div>
+  }
+
+  <section aria-labelledby="personnel-summary-title" class="personnel-section">
+    <h2 id="personnel-summary-title">Resumen de Personal</h2>
+
+    <div class="stats-grid">
+      <!-- Total Empleados -->
+      <article class="stat-card stat-card--primary">
+        <div class="stat-card__content">
+          <div class="stat-card__icon" aria-hidden="true">👥</div>
+          <div class="stat-card__info">
+            <h3>Total Empleados</h3>
+            <p class="stat-card__value">{{ personnelSummary().total }}</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Activos -->
+      <article class="stat-card stat-card--success">
+        <div class="stat-card__content">
+          <div class="stat-card__icon" aria-hidden="true">✓</div>
+          <div class="stat-card__info">
+            <h3>Activos</h3>
+            <p class="stat-card__value">{{ personnelSummary().active }}</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Inactivos -->
+      <article class="stat-card stat-card--danger">
+        <div class="stat-card__content">
+          <div class="stat-card__icon" aria-hidden="true">✗</div>
+          <div class="stat-card__info">
+            <h3>Inactivos</h3>
+            <p class="stat-card__value">{{ personnelSummary().inactive }}</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Suspendidos -->
+      <article class="stat-card stat-card--warning">
+        <div class="stat-card__content">
+          <div class="stat-card__icon" aria-hidden="true">⏸</div>
+          <div class="stat-card__info">
+            <h3>Suspendidos</h3>
+            <p class="stat-card__value">{{ personnelSummary().suspended }}</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Salario Promedio -->
+      <article class="stat-card stat-card--info">
+        <div class="stat-card__content">
+          <div class="stat-card__icon" aria-hidden="true">💰</div>
+          <div class="stat-card__info">
+            <h3>Salario Promedio</h3>
+            <p class="stat-card__value stat-card__value--currency">${{
+              personnelSummary().averageSalary.toLocaleString('es-CO') }}</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Nómina Total -->
+      <article class="stat-card stat-card--accent">
+        <div class="stat-card__content">
+          <div class="stat-card__icon" aria-hidden="true">💵</div>
+          <div class="stat-card__info">
+            <h3>Nómina Total</h3>
+            <p class="stat-card__value stat-card__value--currency">${{
+              personnelSummary().totalPayroll.toLocaleString('es-CO') }}</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
 </div>
