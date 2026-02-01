@@ -207,6 +207,9 @@
     width: 1.25rem;
     height: 1.25rem;
     flex-shrink: 0;
+    // Make SVG icons inherit the link color for theme compatibility
+    filter: brightness(0) saturate(100%) invert(93%) sepia(6%) saturate(206%) hue-rotate(169deg) brightness(96%) contrast(93%);
+    transition: transform 0.2s ease;
   }
 
   &:hover {
@@ -215,6 +218,8 @@
 
     .nav-icon {
       transform: scale(1.1);
+      // Change to primary color on hover
+      filter: brightness(0) saturate(100%) invert(47%) sepia(96%) saturate(1178%) hue-rotate(182deg) brightness(98%) contrast(91%);
     }
   }
 
@@ -231,6 +236,11 @@
     color: var(--primary-color);
     background-color: var(--nav-link-active-bg);
     font-weight: 600;
+
+    .nav-icon {
+      // Active state uses primary color
+      filter: brightness(0) saturate(100%) invert(47%) sepia(96%) saturate(1178%) hue-rotate(182deg) brightness(98%) contrast(91%);
+    }
 
     @media (max-width: 1023px) {
       border-left: 4px solid var(--primary-color);

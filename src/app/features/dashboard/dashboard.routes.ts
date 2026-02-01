@@ -4,21 +4,27 @@ import { ProductsComponent } from './components/products/products.component'
 import { MachineryComponent } from './components/machinery/machinery.component'
 import { PersonnelComponent } from './components/personnel/personnel.component'
 
+import { permissionGuard } from '../../core/guards/permission.guard'
+
 export const DASHBOARD_ROUTES: Routes = [
     {
         path: '',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [permissionGuard]
     },
     {
         path: 'products',
-        component: ProductsComponent
+        component: ProductsComponent,
+        canActivate: [permissionGuard]
     },
     {
         path: 'machinery',
-        component: MachineryComponent
+        component: MachineryComponent,
+        canActivate: [permissionGuard]
     },
     {
         path: 'personnel',
-        component: PersonnelComponent
+        component: PersonnelComponent,
+        canActivate: [permissionGuard]
     }
 ]
